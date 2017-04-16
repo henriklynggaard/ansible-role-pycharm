@@ -3,6 +3,7 @@
 
 - name: Create directories for PyCharm
   file:
+    path: "{{ item }}"
     state: directory
   with_items:
   - "{{ pycharm_download_directory }}"
@@ -26,13 +27,13 @@
     src: "{{ pycharm_installer.dest }}"
     dest: "{{ pycharm_install_directory }}"
 
-- name: Install PyCharm Community Edition plugins
+- name: Install PyCharm Plugins
   unarchive:
     src: "{{ item.dest }}"
-    dest: "/home/henrik/Tools/{{ pycharm_version }}/plugins"
+    dest: "{{ pycharm_location }}/plugins"
   with_items: "{{ pycharm_plugins.results }}"
 
 - name: Create PyCharm Community Edition desktop entry
   template:
-    src: pycharm-ce.desktop.j2
-    dest: /home/henrik/.local/share/applications/{{ pycharm_version }}.desktop
+    src: pycharm.desktop.j2
+    dest: "{{ pycharm_desktop_file_location }}"
