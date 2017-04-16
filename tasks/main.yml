@@ -1,0 +1,38 @@
+---
+# tasks file for pycharm
+
+- name: Create directories for PyCharm
+  file:
+    state: directory
+  with_items:
+  - "{{ pycharm_download_directory }}"
+  - "{{ pycharm_install_directory }}"
+
+- name: Download PyCharm
+  get_url:
+    url: "{{ pycharm_download_url}}"
+    dest: "{{ pycharm_download_directory }}"
+  register: pycharm_installer
+
+- name: Download PyCharm plugins
+  get_url:
+    url: "{{ item }}"
+    dest: "{{ pycharm_download_directory }}"
+  register: pycharm_plugins
+  with_items: "{{ pycharm_plugins }}"
+
+- name: Install PyCharm
+  unarchive:
+    src: "{{ pycharm_installer.dest }}"
+    dest: "{{ pycharm_install_directory }}"
+
+- name: Install PyCharm Community Edition plugins
+  unarchive:
+    src: "{{ item.dest }}"
+    dest: "/home/henrik/Tools/{{ pycharm_version }}/plugins"
+  with_items: "{{ pycharm_plugins.results }}"
+
+- name: Create PyCharm Community Edition desktop entry
+  template:
+    src: pycharm-ce.desktop.j2
+    dest: /home/henrik/.local/share/applications/{{ pycharm_version }}.desktop

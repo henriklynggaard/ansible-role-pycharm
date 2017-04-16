@@ -1,0 +1,20 @@
+galaxy_info:
+  author: Henrik Lynggaard Hansen
+  description: Installs PyCharm and plugins
+
+  license: MIT
+
+  min_ansible_version: 2.1
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+
+  galaxy_tags:
+    - jetbrains
+    - workstation
+    - ide
+    - python
+
+dependencies: []
