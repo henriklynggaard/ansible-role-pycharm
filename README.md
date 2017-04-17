@@ -1,38 +1,79 @@
-Role Name
+Pycharm
 =========
 
-A brief description of the role goes here.
+This role installs Pycharm and configured plugins. It has been tested on Linux Mint 18 but should wokr on most 
+distributions. By default it installs Pycharm community edition 2017.1.1 and no additional plugins
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+    pycharm_version: 2017.1.1
+    pycharm_edition: community
+    pycharm_download_mirror: https://download.jetbrains.com/python/
+    pycharm_plugin_download_mirror: "https://plugins.jetbrains.com/plugin/download?updateId="
+    pycharm_plugins: []
+    pycharm_download_directory: /tmp
+    pycharm_install_directory: "{{ ansible_env['HOME'] }}/Tools"
+
+    pycharm_install_file: "pycharm-{{ pycharm_edition}}-{{ pycharm_version }}.tar.gz"
+    pycharm_download_url: "{{ pycharm_download_mirror }}{{ pycharm_install_file }}"
+    pycharm_location: "{{ pycharm_install_directory }}/pycharm-{{ pycharm_edition }}-{{ pycharm_version }}"
+    pycharm_desktop_file_location: "{{ ansible_env['HOME'] }}/.local/share/applications/pycharm-{{ pycharm_edition }}-{{ pycharm_version }}.desktop"
+
+
+pycharm_plugins is a list of names which get appended to pycharm_plugin_download_mirror to form a full download  
+
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
-Example Playbook
-----------------
+Example 
+-------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+__Example playbook__
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
 
+    - hosts: localhost
+      connection: local
+    
+    roles:
+      - henriklyngaard.pycharm
+      
+__Exmaple inventory for plugins__
+
+The below IDs have been found by going to https://plugins.jetbrains.com/pycharm and searching for the plugin. 
+Once found copy the link location for the desired version and use the _updateId=XXXXX_ part at the end        
+      
+    pycharm_plugins:
+      # ignore 1.7.6
+      - 32828
+      # bash support 1.6.5.171
+      - 31610
+      # ansible 0.9.4
+      - 27616
+      # docker 2.5.3
+      - 33621
+      # markdown 2017.1.20170302
+      - 33092      
+      
+ Alternatively upload the required plugins to a webserver and adjust _pycharm_plugin_download_mirror_ and 
+ _pycharm_plugins_ accordingly
+      
+      
 License
 -------
 
 MIT
 
-Author Information
-------------------
+Change log
+----------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+* 1.0: Initial version
