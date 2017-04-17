@@ -4,6 +4,8 @@ Pycharm
 This role installs Pycharm and configured plugins. It has been tested on Linux Mint 18 but should wokr on most 
 distributions. By default it installs Pycharm community edition 2017.1.1 and no additional plugins
 
+By default Pycharm is installed under the user's home directory and _become_ is not needed.
+
 Requirements
 ------------
 
