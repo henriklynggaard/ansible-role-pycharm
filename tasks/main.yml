@@ -8,6 +8,7 @@
   with_items:
   - "{{ pycharm_download_directory }}"
   - "{{ pycharm_install_directory }}"
+  - "{{ pycharm_desktop_file_directory }}"
 
 - name: Download PyCharm
   get_url:

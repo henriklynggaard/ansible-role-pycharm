@@ -25,8 +25,8 @@ Role Variables
 
     pycharm_install_file: "pycharm-{{ pycharm_edition}}-{{ pycharm_version }}.tar.gz"
     pycharm_download_url: "{{ pycharm_download_mirror }}{{ pycharm_install_file }}"
-    pycharm_location: "{{ pycharm_install_directory }}/pycharm-{{ pycharm_edition }}-{{ pycharm_version }}"
-    pycharm_desktop_file_location: "{{ ansible_env['HOME'] }}/.local/share/applications/pycharm-{{ pycharm_edition }}-{{ pycharm_version }}.desktop"
+    pycharm_desktop_file_directory: "{{ ansible_env['HOME'] }}/.local/share/applications"
+    pycharm_desktop_file_location: "{{ pycharm_desktop_file_directory }}//pycharm-{{ pycharm_edition }}-{{ pycharm_version }}.desktop"
 
 
 pycharm_plugins is a list of names which get appended to pycharm_plugin_download_mirror to form a full download  
@@ -78,4 +78,5 @@ MIT
 Change log
 ----------
 
+* 1.1: Create the desktop file directory in case we are the first
 * 1.0: Initial version
