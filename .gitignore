@@ -1,1 +1,5 @@
 .idea/
+.molecule/
+.vagrant/
+__pycache__
+*.pyc

@@ -1,0 +1,9 @@
+FROM ubuntu:16.10
+RUN apt-get update
+
+RUN apt-get install -y python \
+                       sudo \
+                       bash \
+                       ca-certificates
+
+RUN update-ca-certificates

@@ -7,9 +7,17 @@ galaxy_info:
   min_ansible_version: 2.1
 
   platforms:
+  - name: Fedora
+    versions:
+    - 24
+    - 25
+
   - name: Ubuntu
     versions:
     - trusty
+    - xenial
+    - yakkety
+    - zesty
 
   galaxy_tags:
     - jetbrains

@@ -1,0 +1,12 @@
+FROM ubuntu:14.04
+RUN apt-get update
+
+RUN apt-get install -y python \
+                       python-pip \
+                       sudo \
+                       bash \
+                       ca-certificates
+
+RUN pip install urllib3 pyopenssl ndg-httpsclient pyasn1
+
+RUN update-ca-certificates

@@ -1,0 +1,38 @@
+---
+destroy: always
+driver:
+  name: docker
+
+ansible:
+  playbook: tests/playbook.yml
+
+docker:
+ containers:
+#    - name: ubuntu_trusty
+#      image: ubuntu
+#      image_version: '14.04'
+#      dockerfile: tests/Dockerfile_ubuntu_1404
+    - name: ubuntu_xenial
+      image: ubuntu
+      image_version: '16.04'
+      dockerfile: tests/Dockerfile_ubuntu_1604
+    - name: ubuntu_yakkety
+      image: ubuntu
+      image_version: '16.10'
+      dockerfile: tests/Dockerfile_ubuntu_1610
+    - name: ubuntu_zesty
+      image: ubuntu
+      image_version: '17.04'
+      dockerfile: tests/Dockerfile_ubuntu_1704
+
+    - name: fedora_24
+      image: fedora
+      image_version: '24'
+      command: '/bin/bash'
+    - name: fedora_25
+      image: fedora
+      image_version: '25'
+      command: '/bin/bash'
+
+verifier:
+  name: testinfra

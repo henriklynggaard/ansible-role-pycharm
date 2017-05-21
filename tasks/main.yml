@@ -1,6 +1,12 @@
 ---
 # tasks file for pycharm
 
+- name: install tar on Fedora 24
+  dnf:
+    name: tar
+    state: present
+  when: ansible_distribution == "Fedora" and ansible_distribution_major_version == "24"
+
 - name: Create directories for PyCharm
   file:
     path: "{{ item }}"
@@ -8,13 +14,8 @@
   with_items:
   - "{{ pycharm_download_directory }}"
   - "{{ pycharm_install_directory }}"
-  - "{{ pycharm_desktop_file_directory }}"
+  - "{{ pycharm_desktop_file_location | dirname }}"
 
-- name: Download PyCharm
-  get_url:
-    url: "{{ pycharm_download_url}}"
-    dest: "{{ pycharm_download_directory }}"
-  register: pycharm_installer
 
 - name: Download PyCharm plugins
   get_url:
@@ -25,8 +26,10 @@
 
 - name: Install PyCharm
   unarchive:
-    src: "{{ pycharm_installer.dest }}"
+    copy: no
+    src: "{{ pycharm_download_url}}"
     dest: "{{ pycharm_install_directory }}"
+    creates: "{{pycharm_location }}/bin/pycharm.sh"
 
 - name: Install PyCharm Plugins
   unarchive:
