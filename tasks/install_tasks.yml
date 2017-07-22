@@ -21,7 +21,7 @@
   get_url:
     url: "{{ pycharm_plugin_download_mirror }}{{ item }}"
     dest: "{{ pycharm_download_directory }}"
-  register: pycharm_plugins
+  register: pycharm_plugins_downloaded
   with_items: "{{ pycharm_plugins }}"
 
 - name: Install PyCharm
@@ -35,7 +35,7 @@
   unarchive:
     src: "{{ item.dest }}"
     dest: "{{ pycharm_location }}/plugins"
-  with_items: "{{ pycharm_plugins.results }}"
+  with_items: "{{ pycharm_plugins_downloaded.results }}"
 
 - name: Create PyCharm Community Edition desktop entry
   template:

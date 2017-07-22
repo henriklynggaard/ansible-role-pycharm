@@ -21,15 +21,18 @@ Role Variables
     pycharm_plugin_download_mirror: "https://plugins.jetbrains.com/plugin/download?updateId="
     pycharm_plugins: []
     pycharm_download_directory: /tmp
-    pycharm_install_directory: "{{ ansible_env['HOME'] }}/Tools"
+    pycharm_user_dir: "~{{ (pycharm_install_user is defined) | ternary(pycharm_install_user, ansible_user_id) }}"
+    pycharm_install_directory: "{{ pycharm_user_dir | expanduser }}/Tools"
+    pycharm_install_user: <undefined>
 
     pycharm_install_file: "pycharm-{{ pycharm_edition}}-{{ pycharm_version }}.tar.gz"
     pycharm_download_url: "{{ pycharm_download_mirror }}{{ pycharm_install_file }}"
     pycharm_desktop_file_directory: "{{ ansible_env['HOME'] }}/.local/share/applications"
-    pycharm_desktop_file_location: "{{ pycharm_desktop_file_directory }}//pycharm-{{ pycharm_edition }}-{{ pycharm_version }}.desktop"
+    pycharm_desktop_file_location: "{{ pycharm_user_dir | expanduser }}/.local/share/applications/pycharm-{{ pycharm_edition }}-{{ pycharm_version }}.desktop"
+    
 
-
-pycharm_plugins is a list of names which get appended to pycharm_plugin_download_mirror to form a full download  
+* pycharm_plugins is a list of names which get appended to pycharm_plugin_download_mirror to form a full download
+* Defining pycharm_install_user allows the role to install under a different user, however become is required    
 
 
 Dependencies
@@ -78,6 +81,7 @@ MIT
 Change log
 ----------
 
+* 1.4: Allow installation under another user
 * 1.3: Upgrade to Pycharm 2017.1.5
 * 1.2: Added molecule tests
 * 1.1: Create the desktop file directory in case we are the first
