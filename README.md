@@ -78,6 +78,7 @@ MIT
 Change log
 ----------
 
-* 1.2: Upgrade to Pycharm 2017.1.5
+* 1.3: Upgrade to Pycharm 2017.1.5
+* 1.2: Added molecule tests
 * 1.1: Create the desktop file directory in case we are the first
 * 1.0: Initial version
