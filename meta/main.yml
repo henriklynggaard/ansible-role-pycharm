@@ -23,5 +23,6 @@ galaxy_info:
     - workstation
     - ide
     - python
+    - pycharm
 
 dependencies: []

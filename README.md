@@ -1,8 +1,8 @@
-Pycharm
+Pycharm (https://www.jetbrains.com/pycharm)
 =========
 
 This role installs Pycharm and configured plugins. It has been tested on Linux Mint 18 but should wokr on most 
-distributions. By default it installs Pycharm community edition 2017.1.1 and no additional plugins
+distributions. By default it installs Pycharm community edition 2017.1.5 and no additional plugins
 
 By default Pycharm is installed under the user's home directory and _become_ is not needed.
 
@@ -15,7 +15,7 @@ None
 Role Variables
 --------------
 
-    pycharm_version: 2017.1.1
+    pycharm_version: 2017.1.5
     pycharm_edition: community
     pycharm_download_mirror: https://download.jetbrains.com/python/
     pycharm_plugin_download_mirror: "https://plugins.jetbrains.com/plugin/download?updateId="
@@ -78,5 +78,6 @@ MIT
 Change log
 ----------
 
+* 1.2: Upgrade to Pycharm 2017.1.5
 * 1.1: Create the desktop file directory in case we are the first
 * 1.0: Initial version
