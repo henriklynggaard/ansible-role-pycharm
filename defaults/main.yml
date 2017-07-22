@@ -5,11 +5,12 @@ pycharm_download_mirror: https://download.jetbrains.com/python/
 pycharm_plugin_download_mirror: "https://plugins.jetbrains.com/plugin/download?updateId="
 pycharm_plugins: []
 pycharm_download_directory: /tmp
-pycharm_install_directory: "{{ ansible_env['HOME'] }}/Tools"
+pycharm_user_dir: "~{{ (pycharm_install_user is defined) | ternary(pycharm_install_user, ansible_user_id) }}"
+pycharm_install_directory: "{{ pycharm_user_dir | expanduser }}/Tools"
 
 # calculated
 
 pycharm_install_file: "pycharm-{{ pycharm_edition}}-{{ pycharm_version }}.tar.gz"
 pycharm_download_url: "{{ pycharm_download_mirror }}{{ pycharm_install_file }}"
 pycharm_location: "{{ pycharm_install_directory }}/pycharm-{{ pycharm_edition }}-{{ pycharm_version }}"
-pycharm_desktop_file_location: "{{ ansible_env['HOME'] }}/.local/share/applications/pycharm-{{ pycharm_edition }}-{{ pycharm_version }}.desktop"
+pycharm_desktop_file_location: "{{ pycharm_user_dir | expanduser }}/.local/share/applications/pycharm-{{ pycharm_edition }}-{{ pycharm_version }}.desktop"
