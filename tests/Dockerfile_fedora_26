@@ -1,0 +1,6 @@
+FROM fedora:26
+
+RUN dnf install -y python \
+                   sudo \
+                   bash \
+                   ca-certificates

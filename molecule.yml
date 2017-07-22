@@ -33,6 +33,7 @@ docker:
       image: fedora
       image_version: '26'
       command: '/bin/bash'
+      dockerfile: tests/Dockerfile_fedora_26
 
 verifier:
   name: testinfra
