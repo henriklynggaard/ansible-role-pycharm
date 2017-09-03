@@ -5,6 +5,11 @@ driver:
 
 ansible:
   playbook: tests/playbook.yml
+  group_vars:
+    pro:
+      pycharm_edition: professional
+    free:
+      pycharm_edition: community
 
 docker:
  containers:
@@ -34,6 +39,8 @@ docker:
       image_version: '26'
       command: '/bin/bash'
       dockerfile: tests/Dockerfile_fedora_26
+      ansible_groups:
+        - pro
 
 verifier:
   name: testinfra
