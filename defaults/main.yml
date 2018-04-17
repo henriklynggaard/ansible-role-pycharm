@@ -12,5 +12,5 @@ pycharm_install_directory: "{{ pycharm_user_dir | expanduser }}/Tools"
 
 pycharm_install_file: "pycharm-{{ pycharm_edition}}-{{ pycharm_version }}.tar.gz"
 pycharm_download_url: "{{ pycharm_download_mirror }}{{ pycharm_install_file }}"
-pycharm_location: "{{ pycharm_install_directory }}/pycharm-{{ pycharm_edition }}-{{ pycharm_version }}"
+pycharm_location: "{{ pycharm_install_directory }}/pycharm{% if pycharm_edition == 'community' %}-{{ pycharm_edition }}{%endif%}-{{ pycharm_version }}"
 pycharm_desktop_file_location: "{{ pycharm_user_dir | expanduser }}/.local/share/applications/pycharm-{{ pycharm_edition }}-{{ pycharm_version }}.desktop"
